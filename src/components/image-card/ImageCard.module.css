@@ -1,0 +1,8 @@
+.cardBox {
+}
+img {
+  height: 300px;
+  max-width: 320px;
+  margin: 0;
+  object-fit: cover;
+}
