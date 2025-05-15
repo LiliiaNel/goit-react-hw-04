@@ -1,0 +1,11 @@
+.loadMoreBtn {
+  background-color: #ffffff;
+  color: #4c4fdc;
+  border: 1px solid #4c4fdc;
+  margin: 0 auto;
+}
+
+.loadMoreBtn:hover,
+.loadMoreBtn:focus {
+  background-color: #f2f2f2;
+}
