@@ -45,8 +45,15 @@ function App() {
         return [...prevImages, ...data.results];
       });
         setTotalPages(data.total_pages);
+        const noResults = !data || data.total === 0 || data.results.length === 0;
+        if (noResults) {
+          setIsError(true);
+          setImages([]);
+          setTotalPages(0);
+          return;
+        }
      }
-      catch { setIsError(true); } 
+      catch { setIsError(true);} 
       finally {
       setIsloading(false);
     }

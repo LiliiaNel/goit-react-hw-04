@@ -8,6 +8,7 @@ export default function SearchBar({ onSearch }) {
 
   const handleSubmit = (event) => {
     event.preventDefault();
+    const form = event.target;
 
     if (inputValue.trim() === '') {
       toast("Type something and let's find it!",
@@ -25,6 +26,7 @@ export default function SearchBar({ onSearch }) {
 
     onSearch(inputValue.trim());
     setInputValue('');
+    form.reset();
   };
 
   return (<header className={css.header}>
