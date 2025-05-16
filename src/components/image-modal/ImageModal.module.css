@@ -1,0 +1,36 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: #2b2d42;
+  padding: 30px;
+}
+
+.image {
+  max-width: 100%;
+  border-radius: 10px;
+  margin-bottom: 16px;
+}
+
+.info {
+  text-align: center;
+  color: #4b4276;
+}
+
+.closeBtn {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: transparent;
+  border: none;
+  font-size: 32px;
+  color: #a18aba; /* soft lavender */
+  cursor: pointer;
+  transition: transform 0.2s ease, color 0.2s ease;
+  z-index: 10;
+}
+
+.closeBtn:hover {
+  color: #7a5fa0;
+  transform: scale(1.1);
+}
