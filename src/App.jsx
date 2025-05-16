@@ -20,18 +20,7 @@ function App() {
   const [currentPage, setCurrentPage] = useState(1);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedImage, setSelectedImage] = useState(null);
-
-
-  const openModal = (image) => {
-    setSelectedImage(image);
-    setIsModalOpen(true);
-    console.log("kjsdhfkjsh");
-  };
-
-  const closeModal = () => {
-    setIsModalOpen(false);
-    setSelectedImage(null);
-  };
+  const [totalPages, setTotalPages] = useState(0);
 
   const handleSearch = async (newQuery) => {
     setQuery(newQuery);
@@ -51,10 +40,11 @@ function App() {
       try {
         setIsError(false);
         setIsloading(true);
-        const newImages = await fetchImages(query, currentPage);
+        const data = await fetchImages(query, currentPage);
       setImages((prevImages) => {
-        return [...prevImages, ...newImages];
+        return [...prevImages, ...data.results];
       });
+        setTotalPages(data.total_pages);
      }
       catch { setIsError(true); } 
       finally {
@@ -63,7 +53,22 @@ function App() {
       
     }
     fetchData();
-   }, [query, currentPage]);
+  }, [query, currentPage]);
+
+  
+  const openModal = (image) => {
+    setSelectedImage(image);
+    setIsModalOpen(true);
+  };
+
+  const closeModal = () => {
+    setIsModalOpen(false);
+    setSelectedImage(null);
+  };
+
+  
+  const isLastPage = currentPage < totalPages;
+  const hasImages = images.length > 0;
 
   return (
     <div>
@@ -71,8 +76,8 @@ function App() {
       <SearchBar onSearch={handleSearch} />
       {isLoading && <Loader />}
       {isError && <ErrorMessage />}
-      {images.length >0 && <ImageGallery items={images} onImageClick={openModal} />}
-      {images.length > 0 && !isLoading && <LoadMoreBtn onPaginate={handleNextPage} />}
+      {hasImages && <ImageGallery items={images} onImageClick={openModal} />}
+      {hasImages && !isLoading && isLastPage && <LoadMoreBtn onPaginate={handleNextPage} />}
       <ImageModal isOpen={isModalOpen} onRequestClose={closeModal} image={selectedImage}/>
     </div>
   )

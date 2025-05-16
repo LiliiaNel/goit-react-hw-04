@@ -11,5 +11,5 @@ export const fetchImages = async (query, currentPage) => {
     per_page: 10,
     content_filter: "high",
 }});
-    return response.data.results;
+    return response.data;
 };
